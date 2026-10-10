@@ -1,0 +1,182 @@
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phương ♡</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+        135deg,
+        #a8e8ff,
+        #c8b5ff,
+        #ffbce5,
+        #a6dfff
+    );
+    background-size: 400% 400%;
+    animation: bg 9s ease infinite;
+}
+
+@keyframes bg {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    width: 90%;
+    max-width: 650px;
+    text-align: center;
+    padding: 35px 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.name {
+    font-size: clamp(45px, 12vw, 82px);
+    font-weight: 900;
+    font-style: italic;
+    color: #ff55bd;
+    -webkit-text-stroke: 1.5px white;
+    text-shadow:
+        3px 3px 0 #9d65ff,
+        5px 5px 0 #7444b8,
+        0 0 20px #fff;
+    animation: bounce 2s ease-in-out infinite;
+    margin-bottom: 35px;
+}
+
+.message {
+    font-size: clamp(23px, 6vw, 39px);
+    line-height: 1.65;
+    font-weight: 900;
+    font-style: italic;
+    color: #fff;
+    -webkit-text-stroke: 1px #fff;
+    text-shadow:
+        2px 2px 0 #a45dff,
+        4px 4px 0 #7b42bb,
+        0 0 12px #ff73cf;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 2px #fff); }
+    to { filter: drop-shadow(0 0 12px #ff5bc8); }
+}
+
+.mask {
+    position: fixed;
+    font-size: 40px;
+    opacity: 0.8;
+    animation: float 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.m1 { top: 9%; left: 8%; }
+.m2 { top: 17%; right: 9%; animation-delay: 1s; }
+.m3 { bottom: 13%; left: 10%; animation-delay: 2s; }
+.m4 { bottom: 9%; right: 12%; animation-delay: 0.5s; }
+.m5 { top: 48%; left: 4%; animation-delay: 1.5s; }
+.m6 { top: 53%; right: 4%; animation-delay: 2.5s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-22px) rotate(8deg); }
+}
+
+.sparkle {
+    position: fixed;
+    bottom: -30px;
+    font-size: 18px;
+    animation: rise linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rise {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: 1; }
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.note {
+    margin-top: 32px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 4px #9d65ff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="mask m1">🎭</div>
+<div class="mask m2">🕶️</div>
+<div class="mask m3">🎭</div>
+<div class="mask m4">🕶️</div>
+<div class="mask m5">🎭</div>
+<div class="mask m6">🎭</div>
+
+<main class="container">
+    <h1 class="name">Phương</h1>
+
+    <p class="message">
+        anh xin lỗi<br>
+        đừng im lặng với anh nữa<br>
+        anh nhớ em
+    </p>
+
+    <div class="note">♡ &nbsp; 4EVER &nbsp; ♡</div>
+</main>
+
+<script>
+const symbols = ["♡", "✦", "💗", "✧", "🎭"];
+
+function createSparkle() {
+    const el = document.createElement("div");
+    el.className = "sparkle";
+    el.textContent = symbols[
+        Math.floor(Math.random() * symbols.length)
+    ];
+
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDuration = (4 + Math.random() * 5) + "s";
+    el.style.fontSize = (14 + Math.random() * 20) + "px";
+
+    document.body.appendChild(el);
+
+    setTimeout(() => el.remove(), 9000);
+}
+
+setInterval(createSparkle, 350);
+</script>
+
+</body>
+</html>
+```
