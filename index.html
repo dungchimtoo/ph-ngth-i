@@ -1,182 +1,322 @@
-```html
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phương ♡</title>
+<title>Happy Birthday Phương Thúi ❤️</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#09020d;color:white;
+  font-family:Georgia,serif;
+  overflow:hidden;
+}
+.page{
+  position:fixed;inset:0;
+  display:none;align-items:center;
+  justify-content:center;flex-direction:column;
+  text-align:center;padding:18px;
+}
+.page.active{display:flex;animation:fade .8s}
+@keyframes fade{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:scale(1)}
+}
+button{
+  border:1px solid #ffc6f0;
+  background:linear-gradient(90deg,#a42bcb,#f044a8);
+  color:white;padding:13px 25px;
+  border-radius:30px;font-size:16px;
+  margin-top:20px;cursor:pointer;
+  box-shadow:0 0 20px #ff44cf88;
 }
 
-body {
-    min-height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(
-        135deg,
-        #a8e8ff,
-        #c8b5ff,
-        #ffbce5,
-        #a6dfff
-    );
-    background-size: 400% 400%;
-    animation: bg 9s ease infinite;
+/* TRANG 1 */
+#page1{
+  background:radial-gradient(circle,#401044,#100514 65%,#000);
+}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.intro{
+  position:absolute;top:10%;z-index:2;
+  font-size:clamp(28px,7vw,43px);
+  color:#ffe0fa;
+  text-shadow:0 0 15px #ff38dd,0 0 35px #a23bff;
+}
+.hint{
+  position:absolute;bottom:19%;z-index:2;
+  font:13px Arial;letter-spacing:2px;
+  color:#ffc9f1;
+}
+#page1 button{position:absolute;bottom:8%;z-index:3}
+
+/* TRANG 2 */
+#page2{
+  background:radial-gradient(circle,#521347,#140619);
+  gap:15px;
+}
+.heading{
+  font-size:clamp(25px,6vw,40px);
+  color:#ffd2f4;
+  text-shadow:0 0 18px #ff35c5;
+}
+.banner{
+  width:min(95%,950px);
+  max-height:65vh;
+  object-fit:contain;
+  border-radius:16px;
+  border:2px solid #ffc2ed;
+  box-shadow:0 0 25px #ff36d077;
+}
+.wish{
+  max-width:700px;
+  line-height:1.7;
+  font-size:clamp(15px,3.5vw,19px);
+  color:#ffe8f8;
 }
 
-@keyframes bg {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* TRANG 3 */
+#page3{
+  background:radial-gradient(circle,#541044,#140518);
+  gap:15px;
+}
+.photos{
+  width:min(95%,850px);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.photos img{
+  width:100%;
+  height:min(45vh,420px);
+  object-fit:cover;
+  border-radius:15px;
+  border:2px solid #ffc5ef;
+  box-shadow:0 0 20px #ff42c477;
+}
+.love{
+  font-size:clamp(28px,7vw,48px);
+  color:#ffd0f2;
+  text-shadow:0 0 18px #ff35c5;
+}
+.message{
+  font-size:clamp(16px,4vw,22px);
+  line-height:1.7;
+}
+.signature{
+  font-size:23px;
+  color:#ffbce8;
+  text-shadow:0 0 15px #ff43cb;
 }
 
-.container {
-    width: 90%;
-    max-width: 650px;
-    text-align: center;
-    padding: 35px 18px;
-    position: relative;
-    z-index: 2;
+.floating{
+  position:fixed;bottom:-30px;
+  pointer-events:none;
+  animation:float 4s linear forwards;
+}
+@keyframes float{
+  to{transform:translateY(-110vh) rotate(360deg);opacity:0}
 }
 
-.name {
-    font-size: clamp(45px, 12vw, 82px);
-    font-weight: 900;
-    font-style: italic;
-    color: #ff55bd;
-    -webkit-text-stroke: 1.5px white;
-    text-shadow:
-        3px 3px 0 #9d65ff,
-        5px 5px 0 #7444b8,
-        0 0 20px #fff;
-    animation: bounce 2s ease-in-out infinite;
-    margin-bottom: 35px;
-}
-
-.message {
-    font-size: clamp(23px, 6vw, 39px);
-    line-height: 1.65;
-    font-weight: 900;
-    font-style: italic;
-    color: #fff;
-    -webkit-text-stroke: 1px #fff;
-    text-shadow:
-        2px 2px 0 #a45dff,
-        4px 4px 0 #7b42bb,
-        0 0 12px #ff73cf;
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-8px) rotate(2deg); }
-}
-
-@keyframes glow {
-    from { filter: drop-shadow(0 0 2px #fff); }
-    to { filter: drop-shadow(0 0 12px #ff5bc8); }
-}
-
-.mask {
-    position: fixed;
-    font-size: 40px;
-    opacity: 0.8;
-    animation: float 5s ease-in-out infinite;
-    pointer-events: none;
-}
-
-.m1 { top: 9%; left: 8%; }
-.m2 { top: 17%; right: 9%; animation-delay: 1s; }
-.m3 { bottom: 13%; left: 10%; animation-delay: 2s; }
-.m4 { bottom: 9%; right: 12%; animation-delay: 0.5s; }
-.m5 { top: 48%; left: 4%; animation-delay: 1.5s; }
-.m6 { top: 53%; right: 4%; animation-delay: 2.5s; }
-
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotate(-8deg); }
-    50% { transform: translateY(-22px) rotate(8deg); }
-}
-
-.sparkle {
-    position: fixed;
-    bottom: -30px;
-    font-size: 18px;
-    animation: rise linear infinite;
-    pointer-events: none;
-}
-
-@keyframes rise {
-    from {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-    15% { opacity: 1; }
-    to {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-.note {
-    margin-top: 32px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.85);
-    letter-spacing: 3px;
-    text-shadow: 1px 1px 4px #9d65ff;
+@media(max-width:600px){
+  .photos{grid-template-columns:1fr 1fr}
+  .photos img{height:30vh}
+  .photos img:first-child{
+    grid-column:span 2;height:35vh;
+  }
+  .banner{max-height:55vh}
 }
 </style>
 </head>
 
 <body>
 
-<div class="mask m1">🎭</div>
-<div class="mask m2">🕶️</div>
-<div class="mask m3">🎭</div>
-<div class="mask m4">🕶️</div>
-<div class="mask m5">🎭</div>
-<div class="mask m6">🎭</div>
+<!-- TRANG 1: TRÁI TIM CẦU VỒNG -->
 
-<main class="container">
-    <h1 class="name">Phương</h1>
+<section class="page active" id="page1">
+  <canvas id="heart"></canvas>
 
-    <p class="message">
-        anh xin lỗi<br>
-        đừng im lặng với anh nữa<br>
-        anh nhớ em
-    </p>
+  <h1 class="intro">
+    Happy Birthday<br>Phương Thúi 💗
+  </h1>
 
-    <div class="note">♡ &nbsp; 4EVER &nbsp; ♡</div>
-</main>
+  <div class="hint" id="hint">
+    CHẠM VÀO TRÁI TIM ĐI EM ✨
+  </div>
+
+  <button onclick="go(2)">
+    Mở món quà tiếp theo →
+  </button>
+</section>
+
+<!-- TRANG 2: THIỆP SINH NHẬT -->
+
+<section class="page" id="page2">
+
+  <h1 class="heading">
+    Happy Birthday My Love 🎂
+  </h1>
+
+  <img class="banner"
+       src="data:image/jpeg;base64,BASE64_ANH_THIEP"
+       alt="Thiệp sinh nhật Phương">
+
+  <p class="wish">
+    Chúc em luôn vui vẻ, mạnh khỏe, xinh đẹp
+    và gặp thật nhiều may mắn nhé! ❤️<br>
+    Mong rằng tuổi mới sẽ mang đến cho em
+    thật nhiều điều tuyệt vời.
+  </p>
+
+  <button onclick="go(3)">
+    Anh còn điều muốn nói... 💌
+  </button>
+</section>
+
+<!-- TRANG 3: ẢNH NGƯỜI YÊU -->
+
+<section class="page" id="page3">
+
+  <h1 class="love">
+    CÔ GÁI ANH YÊU 💗
+  </h1>
+
+  <div class="photos">
+    <img src="data:image/jpeg;base64,BASE64_ANH_PHUONG_1"
+         alt="Phương 1">
+
+    <img src="data:image/jpeg;base64,BASE64_ANH_PHUONG_2"
+         alt="Phương 2">
+
+    <img src="data:image/jpeg;base64,BASE64_ANH_PHUONG_3"
+         alt="Phương 3">
+  </div>
+
+  <p class="message">
+    Anh iu em chụt chụt 💋<br>
+    Chúc em tuổi mới luôn hạnh phúc.<br>
+    Cảm ơn em vì đã xuất hiện trong cuộc đời anh.
+  </p>
+
+  <div class="signature">
+    Yêu em nhiều lắm ❤️<br>
+    DŨNG CHIM TO
+  </div>
+
+  <button onclick="go(1)">
+    Xem lại từ đầu ↻
+  </button>
+
+</section>
 
 <script>
-const symbols = ["♡", "✦", "💗", "✧", "🎭"];
 
-function createSparkle() {
-    const el = document.createElement("div");
-    el.className = "sparkle";
-    el.textContent = symbols[
-        Math.floor(Math.random() * symbols.length)
-    ];
+/* CHUYỂN TRANG */
 
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.animationDuration = (4 + Math.random() * 5) + "s";
-    el.style.fontSize = (14 + Math.random() * 20) + "px";
+function go(n){
+  document.querySelectorAll('.page')
+    .forEach(p=>p.classList.remove('active'));
 
-    document.body.appendChild(el);
+  document.getElementById('page'+n)
+    .classList.add('active');
 
-    setTimeout(() => el.remove(), 9000);
+  if(n===3){
+    for(let i=0;i<30;i++)
+      setTimeout(sparkle,i*100);
+  }
 }
 
-setInterval(createSparkle, 350);
-</script>
+/* HIỆU ỨNG TRÁI TIM */
 
+const canvas=document.getElementById('heart');
+const ctx=canvas.getContext('2d');
+
+let W,H,particles=[],hue=0,burst=0;
+
+function point(t,s){
+  return {
+    x:16*Math.pow(Math.sin(t),3)*s,
+    y:-(13*Math.cos(t)-5*Math.cos(2*t)
+      -2*Math.cos(3*t)-Math.cos(4*t))*s
+  };
+}
+
+function resize(){
+  W=canvas.width=innerWidth;
+  H=canvas.height=innerHeight;
+  particles=[];
+
+  let s=Math.min(W*.018,H*.014,11);
+
+  for(let i=0;i<2200;i++){
+    let t=Math.random()*Math.PI*2;
+    let p=point(t,s*(.15+Math.sqrt(Math.random())*.85));
+
+    particles.push({
+      x:p.x,y:p.y,
+      r:.5+Math.random()*1.5,
+      h:Math.random()*360,
+      a:Math.random()*6.28
+    });
+  }
+}
+
+function animate(time){
+  ctx.clearRect(0,0,W,H);
+  hue+=.4;
+  burst*=.94;
+
+  let pulse=1+Math.sin(time*.002)*.02;
+  ctx.globalCompositeOperation='lighter';
+
+  particles.forEach(p=>{
+    let glow=.5+.5*Math.sin(time*.004+p.a);
+    let d=Math.hypot(p.x,p.y);
+
+    let x=W/2+p.x*pulse+p.x/(d+1)*burst*35;
+    let y=H/2+p.y*pulse+p.y/(d+1)*burst*35;
+
+    let color=(p.h+hue)%360;
+
+    ctx.beginPath();
+    ctx.fillStyle=`hsla(${color},100%,70%,${glow})`;
+    ctx.shadowColor=`hsl(${color},100%,65%)`;
+    ctx.shadowBlur=10;
+
+    ctx.arc(x,y,p.r*glow,0,Math.PI*2);
+    ctx.fill();
+  });
+
+  ctx.shadowBlur=0;
+  ctx.globalCompositeOperation='source-over';
+  requestAnimationFrame(animate);
+}
+
+canvas.addEventListener('pointerdown',()=>{
+  burst=1;
+  document.getElementById('hint').innerText=
+    'TRÁI TIM NÀY DÀNH RIÊNG CHO EM 🌈';
+});
+
+/* HIỆU ỨNG BAY */
+
+function sparkle(){
+  let e=document.createElement('span');
+  e.className='floating';
+  e.innerText=['💗','💕','✨','🌸','💖'][
+    Math.floor(Math.random()*5)
+  ];
+  e.style.left=Math.random()*100+'vw';
+  e.style.fontSize=(18+Math.random()*20)+'px';
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),4000);
+}
+
+window.addEventListener('resize',resize);
+resize();
+requestAnimationFrame(animate);
+
+</script>
 </body>
 </html>
-```
