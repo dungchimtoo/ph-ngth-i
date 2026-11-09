@@ -314,4 +314,118 @@ function resize(){
   for(let i=0;i<2200;i++){
     let t=Math.random()*Math.PI*2;
     let p=point(t,s*(.15+Math.sqrt(Math.random())*.85));
-    particles
+    particles.push({
+      x:p.x,y:p.y,
+      r:.5+Math.random()*1.5,
+      h:Math.random()*360,
+      a:Math.random()*6.28
+    });
+  }
+}
+
+function animate(time){
+  ctx.clearRect(0,0,W,H);
+  hue+=.4;
+  burst*=.94;
+  let pulse=1+Math.sin(time*.002)*.02;
+  ctx.globalCompositeOperation='lighter';
+
+  particles.forEach(p=>{
+    let glow=.5+.5*Math.sin(time*.004+p.a);
+    let d=Math.hypot(p.x,p.y);
+    let x=W/2+p.x*pulse+p.x/(d+1)*burst*35;
+    let y=H/2+p.y*pulse+p.y/(d+1)*burst*35;
+    let color=(p.h+hue)%360;
+
+    ctx.beginPath();
+    ctx.fillStyle=`hsla(${color},100%,70%,${glow})`;
+    ctx.shadowColor=`hsl(${color},100%,65%)`;
+    ctx.shadowBlur=10;
+    ctx.arc(x,y,p.r*glow,0,Math.PI*2);
+    ctx.fill();
+  });
+
+  ctx.shadowBlur=0;
+  ctx.globalCompositeOperation='source-over';
+  requestAnimationFrame(animate);
+}
+
+canvas.addEventListener('pointerdown',()=>{
+  burst=1;
+  document.getElementById('hint').innerText = 'TRÁI TIM NÀY DÀNH RIÊNG CHO EM 🌈';
+});
+
+/* HIỆU ỨNG PHÁO HOA TẠI TRANG CUỐI */
+const fwCanvas = document.getElementById('fireworksCanvas');
+const fwCtx = fwCanvas.getContext('2d');
+let fireworks = [];
+
+function startFireworks(){
+  fwCanvas.width = innerWidth;
+  fwCanvas.height = innerHeight;
+  for(let i=0; i<5; i++){
+    setTimeout(() => {
+      createFirework(Math.random() * fwCanvas.width, Math.random() * (fwCanvas.height/2));
+    }, i * 400);
+  }
+}
+
+function createFirework(x, y){
+  let count = 40;
+  let color = `hsl(${Math.random()*360}, 100%, 65%)`;
+  for(let i=0; i<count; i++){
+    let angle = Math.random() * Math.PI * 2;
+    let speed = Math.random() * 4 + 2;
+    fireworks.push({
+      x: x, y: y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      alpha: 1,
+      color: color
+    });
+  }
+}
+
+function updateFireworks(){
+  fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+  fireworks.forEach((f, index) => {
+    f.x += f.vx;
+    f.y += f.vy;
+    f.vy += 0.05;
+    f.alpha -= 0.015;
+
+    if(f.alpha <= 0){
+      fireworks.splice(index, 1);
+    } else {
+      fwCtx.save();
+      fwCtx.globalAlpha = f.alpha;
+      fwCtx.fillStyle = f.color;
+      fwCtx.beginPath();
+      fwCtx.arc(f.x, f.y, 2.5, 0, Math.PI*2);
+      fwCtx.fill();
+      fwCtx.restore();
+    }
+  });
+  requestAnimationFrame(updateFireworks);
+}
+updateFireworks();
+
+/* HIỆU ỨNG BAY */
+function sparkle(){
+  let e=document.createElement('span');
+  e.className='floating';
+  e.innerText=['💗','💕','✨','🌸','💖'][
+    Math.floor(Math.random()*5)
+  ];
+  e.style.left=Math.random()*100+'vw';
+  e.style.fontSize=(18+Math.random()*20)+'px';
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),4000);
+}
+
+window.addEventListener('resize',resize);
+resize();
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
