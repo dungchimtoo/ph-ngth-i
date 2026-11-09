@@ -28,15 +28,17 @@ button{
   background:linear-gradient(90deg,#a42bcb,#f044a8);
   color:white;padding:13px 25px;
   border-radius:30px;font-size:16px;
-  margin-top:20px;cursor:pointer;
+  margin-top:15px;cursor:pointer;
   box-shadow:0 0 20px #ff44cf88;
+  transition: transform 0.2s;
 }
+button:hover { transform: scale(1.05); }
 
 /* TRANG 1 */
 #page1{
   background:radial-gradient(circle,#401044,#100514 65%,#000);
 }
-canvas{position:absolute;inset:0;width:100%;height:100%}
+canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 .intro{
   position:absolute;top:10%;z-index:2;
   font-size:clamp(28px,7vw,43px);
@@ -50,10 +52,10 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
 }
 #page1 button{position:absolute;bottom:8%;z-index:3}
 
-/* TRANG 2 */
+/* TRANG 2: THIỆP SINH NHẬT */
 #page2{
   background:radial-gradient(circle,#521347,#140619);
-  gap:15px;
+  gap:12px;
 }
 .heading{
   font-size:clamp(25px,6vw,40px);
@@ -61,8 +63,8 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
   text-shadow:0 0 18px #ff35c5;
 }
 .banner{
-  width:min(95%,950px);
-  max-height:65vh;
+  width:min(95%,850px);
+  max-height:50vh;
   object-fit:contain;
   border-radius:16px;
   border:2px solid #ffc2ed;
@@ -70,16 +72,45 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
 }
 .wish{
   max-width:700px;
-  line-height:1.7;
-  font-size:clamp(15px,3.5vw,19px);
+  line-height:1.6;
+  font-size:clamp(14px,3.2vw,18px);
   color:#ffe8f8;
 }
 
-/* TRANG 3 */
+/* TRANG 3: MINI GAME "HỨNG TRÁI TIM" */
 #page3{
-  background:radial-gradient(circle,#541044,#140518);
-  gap:15px;
+  background:radial-gradient(circle,#3a0a3a,#100214);
+  gap:10px;
 }
+#game-container{
+  position:relative;
+  width:min(95%, 450px);
+  height:55vh;
+  border:2px dashed #ffc5ef;
+  border-radius:15px;
+  background:rgba(0,0,0,0.3);
+  overflow:hidden;
+  touch-action: none;
+}
+.target-heart{
+  position:absolute;
+  font-size:35px;
+  cursor:pointer;
+  user-select:none;
+  animation: popUp 0.3s ease-out;
+}
+@keyframes popUp {
+  0% { transform: scale(0); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* TRANG 4: ẢNH NGƯỜI YÊU & PHÁO HOA */
+#page4{
+  background:radial-gradient(circle,#541044,#140518);
+  gap:12px;
+}
+#fireworksCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 .photos{
   width:min(95%,850px);
   display:grid;
@@ -88,23 +119,23 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
 }
 .photos img{
   width:100%;
-  height:min(45vh,420px);
+  height:min(38vh,350px);
   object-fit:cover;
   border-radius:15px;
   border:2px solid #ffc5ef;
   box-shadow:0 0 20px #ff42c477;
 }
 .love{
-  font-size:clamp(28px,7vw,48px);
+  font-size:clamp(26px,6vw,42px);
   color:#ffd0f2;
   text-shadow:0 0 18px #ff35c5;
 }
 .message{
-  font-size:clamp(16px,4vw,22px);
-  line-height:1.7;
+  font-size:clamp(15px,3.5vw,20px);
+  line-height:1.6;
 }
 .signature{
-  font-size:23px;
+  font-size:21px;
   color:#ffbce8;
   text-shadow:0 0 15px #ff43cb;
 }
@@ -120,11 +151,9 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
 
 @media(max-width:600px){
   .photos{grid-template-columns:1fr 1fr}
-  .photos img{height:30vh}
-  .photos img:first-child{
-    grid-column:span 2;height:35vh;
-  }
-  .banner{max-height:55vh}
+  .photos img{height:25vh}
+  .photos img:first-child{grid-column:span 2;height:28vh;}
+  .banner{max-height:45vh}
 }
 </style>
 </head>
@@ -132,7 +161,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
 <body>
 
 <!-- TRANG 1: TRÁI TIM CẦU VỒNG -->
-
 <section class="page active" id="page1">
   <canvas id="heart"></canvas>
 
@@ -150,14 +178,11 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
 </section>
 
 <!-- TRANG 2: THIỆP SINH NHẬT -->
-
 <section class="page" id="page2">
-
   <h1 class="heading">
     Happy Birthday My Love 🎂
   </h1>
 
-  <!-- Đã thay bằng banner-phuong.png -->
   <img class="banner"
        src="banner-phuong.png"
        alt="Thiệp sinh nhật Phương">
@@ -170,28 +195,38 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
   </p>
 
   <button onclick="go(3)">
-    Anh còn điều muốn nói... 💌
+    Chơi thử thách nhỏ chút nha! 🎮 →
   </button>
 </section>
 
-<!-- TRANG 3: ẢNH NGƯỜI YÊU -->
-
+<!-- TRANG 3: MINI GAME "HỨNG TRÁI TIM" -->
 <section class="page" id="page3">
+  <h1 class="heading" style="font-size:clamp(22px, 5vw, 32px);">
+    Thử Thách Tình Yêu 🎯
+  </h1>
+  <p id="game-instruction" style="color:#ffe8f8; font-size:15px;">
+    Hãy chạm vào <strong>5 trái tim</strong> xuất hiện để mở khóa bất ngờ! (<span id="score">0</span>/5)
+  </p>
+
+  <div id="game-container"></div>
+
+  <button id="next-from-game" onclick="go(4)" style="display:none;">
+    Xem quà đặc biệt cuối cùng →
+  </button>
+</section>
+
+<!-- TRANG 4: ẢNH NGƯỜI YÊU & PHÁO HOA -->
+<section class="page" id="page4">
+  <canvas id="fireworksCanvas"></canvas>
 
   <h1 class="love">
     CÔ GÁI ANH YÊU 💗
   </h1>
 
-  <!-- Đã thay bằng phuong-1.png, phuong-2.png, phuong-3.png -->
   <div class="photos">
-    <img src="phuong-1.png"
-         alt="Phương 1">
-
-    <img src="phuong-2.png"
-         alt="Phương 2">
-
-    <img src="phuong-3.png"
-         alt="Phương 3">
+    <img src="phuong-1.png" alt="Phương 1">
+    <img src="phuong-2.png" alt="Phương 2">
+    <img src="phuong-3.png" alt="Phương 3">
   </div>
 
   <p class="message">
@@ -205,16 +240,13 @@ canvas{position:absolute;inset:0;width:100%;height:100%}
     DŨNG CHIM TO
   </div>
 
-  <button onclick="go(1)">
+  <button onclick="go(1)" style="z-index: 5;">
     Xem lại từ đầu ↻
   </button>
-
 </section>
 
 <script>
-
 /* CHUYỂN TRANG */
-
 function go(n){
   document.querySelectorAll('.page')
     .forEach(p=>p.classList.remove('active'));
@@ -222,17 +254,75 @@ function go(n){
   document.getElementById('page'+n)
     .classList.add('active');
 
-  if(n===3){
-    for(let i=0;i<30;i++)
-      setTimeout(sparkle,i*100);
+  if(n === 3){
+    initGame();
+  }
+
+  if(n === 4){
+    for(let i=0; i<35; i++)
+      setTimeout(sparkle, i*80);
+    startFireworks();
   }
 }
 
-/* HIỆU ỨNG TRÁI TIM */
+/* LOGIC MINI GAME "HỨNG TRÁI TIM" */
+let score = 0;
+let gameInterval = null;
 
+function initGame(){
+  score = 0;
+  document.getElementById('score').innerText = score;
+  document.getElementById('next-from-game').style.display = 'none';
+  document.getElementById('game-instruction').innerHTML = 'Hãy chạm vào <strong>5 trái tim</strong> xuất hiện để mở khóa bất ngờ! (<span id="score">0</span>/5)';
+  
+  const container = document.getElementById('game-container');
+  container.innerHTML = '';
+  
+  if(gameInterval) clearInterval(gameInterval);
+  
+  spawnHeart();
+  gameInterval = setInterval(() => {
+    if(score < 5) spawnHeart();
+  }, 900);
+}
+
+function spawnHeart(){
+  const container = document.getElementById('game-container');
+  if(!document.getElementById('page3').classList.contains('active')) return;
+  
+  const heart = document.createElement('div');
+  heart.className = 'target-heart';
+  heart.innerText = ['💖','💕','💗','💓','✨'][Math.floor(Math.random()*5)];
+  
+  const maxX = container.clientWidth - 50;
+  const maxY = container.clientHeight - 50;
+  heart.style.left = Math.random() * Math.max(maxX, 10) + 'px';
+  heart.style.top = Math.random() * Math.max(maxY, 10) + 'px';
+  
+  heart.addEventListener('pointerdown', (e) => {
+    e.stopPropagation();
+    score++;
+    document.getElementById('score').innerText = score;
+    heart.remove();
+    
+    if(score >= 5){
+      clearInterval(gameInterval);
+      document.getElementById('game-instruction').innerText = '🎉 Xuất sắc! Đã mở khóa thành công món quà cuối!';
+      document.getElementById('next-from-game').style.display = 'inline-block';
+    }
+  });
+  
+  container.appendChild(heart);
+  
+  // Tự động biến mất sau 1.2 giây nếu không bấm kịp
+  setTimeout(() => {
+    if(heart.parentElement) heart.remove();
+  }, 1200);
+}
+
+/* HIỆU ỨNG TRÁI TIM TRANG 1 */
 const canvas=document.getElementById('heart');
 const ctx=canvas.getContext('2d');
-
 let W,H,particles=[],hue=0,burst=0;
 
 function point(t,s){
@@ -247,13 +337,10 @@ function resize(){
   W=canvas.width=innerWidth;
   H=canvas.height=innerHeight;
   particles=[];
-
   let s=Math.min(W*.018,H*.014,11);
-
   for(let i=0;i<2200;i++){
     let t=Math.random()*Math.PI*2;
     let p=point(t,s*(.15+Math.sqrt(Math.random())*.85));
-
     particles.push({
       x:p.x,y:p.y,
       r:.5+Math.random()*1.5,
@@ -267,24 +354,20 @@ function animate(time){
   ctx.clearRect(0,0,W,H);
   hue+=.4;
   burst*=.94;
-
   let pulse=1+Math.sin(time*.002)*.02;
   ctx.globalCompositeOperation='lighter';
 
   particles.forEach(p=>{
     let glow=.5+.5*Math.sin(time*.004+p.a);
     let d=Math.hypot(p.x,p.y);
-
     let x=W/2+p.x*pulse+p.x/(d+1)*burst*35;
     let y=H/2+p.y*pulse+p.y/(d+1)*burst*35;
-
     let color=(p.h+hue)%360;
 
     ctx.beginPath();
     ctx.fillStyle=`hsla(${color},100%,70%,${glow})`;
     ctx.shadowColor=`hsl(${color},100%,65%)`;
     ctx.shadowBlur=10;
-
     ctx.arc(x,y,p.r*glow,0,Math.PI*2);
     ctx.fill();
   });
@@ -300,8 +383,62 @@ canvas.addEventListener('pointerdown',()=>{
     'TRÁI TIM NÀY DÀNH RIÊNG CHO EM 🌈';
 });
 
-/* HIỆU ỨNG BAY */
+/* HIỆU ỨNG PHÁO HOA TẠI TRANG CUỐI */
+const fwCanvas = document.getElementById('fireworksCanvas');
+const fwCtx = fwCanvas.getContext('2d');
+let fireworks = [];
 
+function startFireworks(){
+  fwCanvas.width = innerWidth;
+  fwCanvas.height = innerHeight;
+  for(let i=0; i<5; i++){
+    setTimeout(() => {
+      createFirework(Math.random() * fwCanvas.width, Math.random() * (fwCanvas.height/2));
+    }, i * 400);
+  }
+}
+
+function createFirework(x, y){
+  let count = 40;
+  let color = `hsl(${Math.random()*360}, 100%, 65%)`;
+  for(let i=0; i<count; i++){
+    let angle = Math.random() * Math.PI * 2;
+    let speed = Math.random() * 4 + 2;
+    fireworks.push({
+      x: x, y: y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      alpha: 1,
+      color: color
+    });
+  }
+}
+
+function updateFireworks(){
+  fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+  fireworks.forEach((f, index) => {
+    f.x += f.vx;
+    f.y += f.vy;
+    f.vy += 0.05;
+    f.alpha -= 0.015;
+
+    if(f.alpha <= 0){
+      fireworks.splice(index, 1);
+    } else {
+      fwCtx.save();
+      fwCtx.globalAlpha = f.alpha;
+      fwCtx.fillStyle = f.color;
+      fwCtx.beginPath();
+      fwCtx.arc(f.x, f.y, 2.5, 0, Math.PI*2);
+      fwCtx.fill();
+      fwCtx.restore();
+    }
+  });
+  requestAnimationFrame(updateFireworks);
+}
+updateFireworks();
+
+/* HIỆU ỨNG BAY */
 function sparkle(){
   let e=document.createElement('span');
   e.className='floating';
@@ -317,7 +454,6 @@ function sparkle(){
 window.addEventListener('resize',resize);
 resize();
 requestAnimationFrame(animate);
-
 </script>
 </body>
 </html>
