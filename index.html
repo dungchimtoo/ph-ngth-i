@@ -113,7 +113,9 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 /* TRANG 4: ẢNH NGƯỜI YÊU & PHÁO HOA */
 #page4{
   background:radial-gradient(circle,#541044,#140518);
-  gap:12px;
+  gap:10px;
+  overflow-y: auto;
+  padding: 20px 10px;
 }
 #fireworksCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 .photos{
@@ -124,18 +126,19 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 }
 .photos img{
   width:100%;
-  height:min(38vh,350px);
+  height:min(32vh,300px);
   object-fit:cover;
   border-radius:15px;
   border:2px solid #ffc5ef;
   box-shadow:0 0 20px #ff42c477;
 }
 .message{
-  font-size:clamp(15px,3.5vw,20px);
-  line-height:1.6;
+  font-size:clamp(13px, 3.2vw, 17px);
+  line-height:1.5;
+  max-width: 650px;
 }
 .signature{
-  font-size:21px;
+  font-size:18px;
   color:#ffbce8;
   text-shadow:0 0 15px #ff43cb;
 }
@@ -151,8 +154,8 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 
 @media(max-width:600px){
   .photos{grid-template-columns:1fr 1fr}
-  .photos img{height:25vh}
-  .photos img:first-child{grid-column:span 2;height:28vh;}
+  .photos img{height:22vh}
+  .photos img:first-child{grid-column:span 2;height:25vh;}
   .banner{max-height:45vh}
 }
 </style>
@@ -227,7 +230,8 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
   <p class="message">
     Anh iu em chụt chụt 💋<br>
     Chúc em tuổi mới luôn hạnh phúc.<br>
-    Cảm ơn em vì đã xuất hiện trong cuộc đời anh.
+    Cảm ơn em vì đã xuất hiện trong cuộc đời anh.<br>
+    <strong>Cảm ơn em đã iu anh dù cho đầu anh toàn sếch, tính cách anh siu pín thesi nhưng em vx iu anh. Iu em nhìu hihi ❤️</strong>
   </p>
 
   <div class="signature">
@@ -235,7 +239,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
     DŨNG CHIM TO
   </div>
 
-  <button onclick="go(1)" style="z-index: 5;">
+  <button onclick="go(1)" style="z-index: 5; margin-top: 5px;">
     Xem lại từ đầu ↻
   </button>
 </section>
