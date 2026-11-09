@@ -45,12 +45,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
   color:#ffe0fa;
   text-shadow:0 0 15px #ff38dd,0 0 35px #a23bff;
 }
-.hint{
-  position:absolute;bottom:19%;z-index:2;
-  font:13px Arial;letter-spacing:2px;
-  color:#ffc9f1;
-}
-#page1 button{position:absolute;bottom:8%;z-index:3}
+#page1 button{position:absolute;bottom:10%;z-index:3}
 
 /* TRANG 2: THIỆP SINH NHẬT */
 #page2{
@@ -77,7 +72,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
   color:#ffe8f8;
 }
 
-/* TRANG 3: TRANG TROLL HÀI HƯỚC (NÚT BẰNG NHAU) */
+/* TRANG 3: TRANG TROLL GỢI ĐÒN */
 #page3{
   background:radial-gradient(circle,#3a0a3a,#100214);
   gap:15px;
@@ -130,11 +125,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
   border:2px solid #ffc5ef;
   box-shadow:0 0 20px #ff42c477;
 }
-.love{
-  font-size:clamp(26px,6vw,42px);
-  color:#ffd0f2;
-  text-shadow:0 0 18px #ff35c5;
-}
 .message{
   font-size:clamp(15px,3.5vw,20px);
   line-height:1.6;
@@ -173,10 +163,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
     Happy Birthday<br>Phương Thúi 💗
   </h1>
 
-  <div class="hint" id="hint">
-    CHẠM VÀO TRÁI TIM ĐI EM ✨
-  </div>
-
   <button onclick="go(2)">
     Mở món quà tiếp theo →
   </button>
@@ -204,7 +190,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
   </button>
 </section>
 
-<!-- TRANG 3: TRANG TROLL HÀI HƯỚC (HAI NÚT BẰNG NHAU) -->
+<!-- TRANG 3: TRANG TROLL GỢI ĐÒN -->
 <section class="page" id="page3">
   <div class="troll-box">
     <h2 style="color:#ffd2f4; margin-bottom:12px; font-size:clamp(20px, 5vw, 26px);">Kiểm Tra Độ Thật Lòng 🧐</h2>
@@ -214,7 +200,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
     
     <div class="troll-btns" id="trollArea">
       <button id="btn-yes" onclick="passTroll()">Công nhận luôn! 😍</button>
-      <button id="btn-no" onclick="handleNoClick()">Không thèm! 😛</button>
+      <button id="btn-no" onclick="handleNoClick()">Đéo nhé! 🤪</button>
     </div>
   </div>
 </section>
@@ -222,10 +208,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 <!-- TRANG 4: ẢNH NGƯỜI YÊU & PHÁO HOA -->
 <section class="page" id="page4">
   <canvas id="fireworksCanvas"></canvas>
-
-  <h1 class="love">
-    CÔ GÁI ANH YÊU 💗
-  </h1>
 
   <div class="photos">
     <img src="phuong-1.png" alt="Phương 1">
@@ -265,35 +247,41 @@ function go(n){
   }
 }
 
-/* LOGIC TROLL KHI BẤM NÚT "KHÔNG" */
+/* LOGIC TROLL KHI BẤM "ĐÉO NHÉ!" */
 let trollClicks = 0;
 const trollMessages = [
-  "Ê bấm nhầm nút đúng không? Chọn lại đi cưng! 😜",
-  "Định dỗi à? Không có cửa đâu nha bé ơi! 🤣",
-  "Nút này bịa đặt đấy, bấm nút xanh bên cạnh kìa! 💅",
-  "Cố tình bấm nút này là tối nay phải phi tang quà đấy nhé! ⚠️",
-  "Thôi đừng lừa dối bản thân nữa, bấm nút xanh đi em ơi! 🥰"
+  "1. concak chọn lại đi 💅",
+  "2. anh bảo là chọn lại 🤨",
+  "3. hmuhmu chạ iu anh 🥺",
+  "4. cơ hội cuối ⚠️",
+  "5. thôi nhường e đók 🥰"
+];
+
+const noButtonTexts = [
+  "Cố đấm ăn xôi à? 🤡",
+  "Bướng hả cưng? 💢",
+  "Thôi tha cho anh đi! ✋",
+  "Sắp hiện hồn rồi đấy! 🤭",
+  "Bấm nút xanh đi mờ! ✨"
 ];
 
 function handleNoClick(){
   const q = document.getElementById('troll-question');
   q.innerText = trollMessages[trollClicks % trollMessages.length];
+  
+  const btnNo = document.getElementById('btn-no');
+  btnNo.innerText = noButtonTexts[trollClicks % noButtonTexts.length];
+  
   trollClicks++;
   
-  // Đổi tên nút Không thành các câu trêu vui dần
-  const btnNo = document.getElementById('btn-no');
-  if(trollClicks === 1) btnNo.innerText = "Vẫn cố chấp! 😤";
-  if(trollClicks === 2) btnNo.innerText = "Không bao giờ! 🙈";
-  if(trollClicks === 3) btnNo.innerText = "Thôi đành chịu thua 🛑";
-  if(trollClicks >= 4) {
-    // Sau vài lần bấm thì ép chuyển sang nhận quà luôn cho vui
+  if(trollClicks >= 5) {
     passTroll();
   }
 }
 
 function passTroll(){
   document.getElementById('troll-question').innerHTML = '🎉 Thôi không giỡn nữa, thưởng cho em ngoan ngoãn được xem quà đặc biệt nhé! 🥰🎁';
-  document.getElementById('trollArea').innerHTML = '<button onclick="go(4)" style="background:linear-gradient(90deg,#ff416c,#ff4b2b); width:100%;">Nhận quà sinh nhật thôi nào! 💖</button>';
+  document.getElementById('trollArea').innerHTML = '<button onclick="go(4)" style="background:linear-gradient(90deg,#ff416c,#ff4b2b); width:100%;">Nhận quà sinh nhật ngay! 💖</button>';
 }
 
 /* HIỆU ỨNG TRÁI TIM TRANG 1 */
@@ -355,8 +343,6 @@ function animate(time){
 
 canvas.addEventListener('pointerdown',()=>{
   burst=1;
-  document.getElementById('hint').innerText=
-    'TRÁI TIM NÀY DÀNH RIÊNG CHO EM 🌈';
 });
 
 /* HIỆU ỨNG PHÁO HOA TẠI TRANG CUỐI */
