@@ -45,12 +45,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
   color:#ffe0fa;
   text-shadow:0 0 15px #ff38dd,0 0 35px #a23bff;
 }
-.hint{
-  position:absolute;bottom:19%;z-index:2;
-  font:13px Arial;letter-spacing:2px;
-  color:#ffc9f1;
-}
-#page1 button{position:absolute;bottom:8%;z-index:3}
+#page1 button{position:absolute;bottom:10%;z-index:3}
 
 /* TRANG 2: THIỆP SINH NHẬT */
 #page2{
@@ -171,10 +166,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
     Happy Birthday<br>Phương Thúi 💗
   </h1>
 
-  <div class="hint" id="hint">
-    CHẠM VÀO TRÁI TIM ĐI EM ✨
-  </div>
-
   <button onclick="go(2)">
     Mở món quà tiếp theo →
   </button>
@@ -228,8 +219,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
   </div>
 
   <p class="message">
-    Chúc em sinh nhật vui vẻ chụt chịt 💋 Cảm ơn em đã xuất hiện trong cuộc đời anh.<br>
-    Cảm ơn em đã iu anh dù cho đầu anh toàn sếch, tính cách anh siu pín thesi nhưng em vx iu anh. Iu em nhìu hihi ❤️
+    cảm ơn e đã iu anh dù cho đầu anh toàn sếch tính cách anh siu pín thesi nhưng e vx iu anh.iu em nhìu hihi chúc em sinh nhật vui vẻ chụt chịt
   </p>
 
   <div class="signature">
@@ -354,7 +344,6 @@ function animate(time){
 
 canvas.addEventListener('pointerdown',()=>{
   burst=1;
-  document.getElementById('hint').innerText = 'TRÁI TIM NÀY DÀNH RIÊNG CHO EM 🌈';
 });
 
 /* HIỆU ỨNG PHÁO HOA TẠI TRANG CUỐI */
